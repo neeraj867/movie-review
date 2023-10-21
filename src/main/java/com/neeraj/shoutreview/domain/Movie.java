@@ -1,5 +1,6 @@
 package com.neeraj.shoutreview.domain;
 
+import com.neeraj.shoutreview.payloads.Response.MovieResponse;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,7 +26,7 @@ public class Movie implements Serializable {
     private Double rating;
     @OneToMany(mappedBy = "Movie")
     private List<Review> reviews;
-//    public MovieResponse toMovieResponse() {
-//        return MovieResponse.builder().genre(this.genre).title(this.title).rating(this.rating).build();
-//    }
+    public MovieResponse toMovieResponse() {
+        return MovieResponse.builder().genre(this.genre).title(this.title).rating(this.rating).reviews(Review.toReviewResponse(this.reviews)).build();
+    }
 }
