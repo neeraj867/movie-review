@@ -24,7 +24,7 @@ public class Movie implements Serializable {
     @Enumerated(EnumType.STRING)
     private Genre genre;
     private Double rating;
-    @OneToMany(mappedBy = "Movie")
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Review> reviews;
     public MovieResponse toMovieResponse() {
         return MovieResponse.builder().genre(this.genre).title(this.title).rating(this.rating).reviews(Review.toReviewResponse(this.reviews)).build();

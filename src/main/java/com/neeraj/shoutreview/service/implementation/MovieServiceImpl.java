@@ -21,7 +21,6 @@ public class MovieServiceImpl implements MovieService {
     private MovieRepo movieRepo;
     @Override
     public MovieResponse findMovie(String title) {
-        // to handle exception
         Movie movie = movieRepo.findByTitle(title).orElseThrow(()->new ResourceNotFoundException("movie","title"));
         return movie.toMovieResponse();
     }
@@ -31,7 +30,6 @@ public class MovieServiceImpl implements MovieService {
         if(Arrays.stream(Genre.values()).noneMatch(g->g.toString().equals(genre))){
             return new ArrayList<>();
         }
-        // to handle exception
         List<Movie> moviesList = this.movieRepo.findByGenre(Genre.valueOf(genre)).orElseThrow(()->new ResourceNotFoundException("movie","genre"));
         List<MovieResponse> movieResponseList = moviesList.stream().sorted(Comparator.comparing(Movie::getRating,Comparator.reverseOrder())).map(Movie::toMovieResponse).collect(Collectors.toList());
         return movieResponseList;

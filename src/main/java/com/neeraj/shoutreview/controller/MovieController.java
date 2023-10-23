@@ -21,12 +21,12 @@ public class MovieController {
     private MovieService movieService;
 
     @GetMapping("/title")
-    public ResponseEntity<MovieResponse> findMovie(@RequestParam String title) {
-        return new ResponseEntity<>(this.movieService.findMovie(title), HttpStatus.OK);
+    public ResponseEntity<MovieResponse> findMovie(@RequestParam String query) {
+        return new ResponseEntity<>(this.movieService.findMovie(query), HttpStatus.OK);
     }
 
     @GetMapping("/genre")
-    public ResponseEntity<List<MovieResponse>> findMoviesByGenre(@RequestParam String genre) {
-        return new ResponseEntity<>(this.movieService.findMoviesByGenre(genre),HttpStatus.OK);
+    public ResponseEntity<List<MovieResponse>> findMoviesByGenre(@RequestParam String query) {
+        return new ResponseEntity<>(this.movieService.findMoviesByGenre(query),HttpStatus.OK);
     }
 }
